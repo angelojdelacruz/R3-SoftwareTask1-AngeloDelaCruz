@@ -10,7 +10,6 @@ int outTens3 = (11);
 int outTens4 = (2);
 float potentInput = 0.0; // Declares a variable to store a value read from the potentiometer
 float percentage = 0.0; // Declares a percentage variable
-byte pins1[] = {0, 1, 2, 3};
 int wholePercent = 0; // Used to store the percentage variable as a rounded whole number
 int onesDigit = 0; // Declares a variable to store the digit in the ones place
 int tensDigit = 0; // Declares a variable to store the digit in the tens place
