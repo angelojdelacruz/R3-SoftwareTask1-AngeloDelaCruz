@@ -29,21 +29,22 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  potentInput = analogRead(inPin);
-  percentage = (potentInput/1023)*100;
-  wholePercent = round(percentage); // Rounded percentage to a whole number
+  potentInput = analogRead(inPin); // Receives the output/reads the position of the potentiometer and stores it as an input from 0-1023
+  percentage = (potentInput/1023)*100; // Converts the potentiometer input into a percentage from 0% to 100%
+  wholePercent = round(percentage); // Rounds the percentage to a whole number
+  // Manually rounds 100% to 99%
   if (wholePercent == 100) {
     wholePercent = wholePercent - 1;
   }
-  onesDigit = wholePercent % 10;
-  tensDigit = (wholePercent - onesDigit) / 10;
+  onesDigit = wholePercent % 10; // Gets and stores the ones digit of the rounded percentage
+  tensDigit = (wholePercent - onesDigit) / 10; // Gets and stores the tens digit of the rounded percentage
+  // Next 4 lines prints out the percentages and digits in the serial monitor for clarity, they aren't technically needed otherwise
   Serial.println(percentage);
   Serial.println(wholePercent);
   Serial.println(tensDigit);
   Serial.println(onesDigit);
 
-  // Ones digit loop
+  // Ones digit loop - Manually converts the ones digit into the respective binary input for the 7-segment decoder
   for (int i=0; i<10; i++) {
     if (onesDigit == i) {
         if (i == 0) {
@@ -108,7 +109,7 @@ void loop() {
         }
     }
   }
-  // Tens digit loop
+  // Tens digit loop - Manually converts the tens digit into the respective binary input for the 7-segment decoder
   for (int i; i<10 ; i++) {
     if (tensDigit == i) {
         if (i == 0){
@@ -174,6 +175,6 @@ void loop() {
     }
   }
   Serial.println();
-  delay(1000);
+  delay(1000); // Stops the program from looping for 1 second
   
 }
