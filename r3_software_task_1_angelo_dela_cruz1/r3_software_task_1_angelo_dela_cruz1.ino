@@ -1,20 +1,21 @@
 // C++ code
 int inPin = (A0); // Declares pin A0 as the input pin
-int outOnes1 = (8); // This and the next four lines declare pins 8, 9, 10, and 12 as output pins for the ones digit.
+int outOnes1 = (8); // This and the next four lines declare pins 0-3 as output pins for the ones digit.
 int outOnes2 = (9);
 int outOnes3 = (12);
 int outOnes4 = (10);
-int outTens1 = (13); // This and the next four lines declare pins 13, 3, 11, and 2 as output pins for the tens digit.
+int outTens1 = (13); // This and the next four lines declare pins as output pins for the tens digit.
 int outTens2 = (3);
 int outTens3 = (11);
 int outTens4 = (2);
 float potentInput = 0.0; // Declares a variable to store a value read from the potentiometer
-float percentage = 0.0; // Declares a variable to store percentage
+float percentage = 0.0; // Declares a percentage variable
+byte pins1[] = {0, 1, 2, 3};
 int wholePercent = 0; // Used to store the percentage variable as a rounded whole number
 int onesDigit = 0; // Declares a variable to store the digit in the ones place
 int tensDigit = 0; // Declares a variable to store the digit in the tens place
 void setup() {
-  // Marks the input pin as an input and the output pins as outputs.
+  // put your setup code here, to run once:
   pinMode (inPin, INPUT);
   pinMode (outOnes1, OUTPUT);
   pinMode (outOnes2, OUTPUT);
@@ -28,21 +29,21 @@ void setup() {
 }
 
 void loop() {
-  potentInput = analogRead(inPin); // Reads value from potentiometer
-  percentage = (potentInput/1023)*100; // Converts potentiometer input to a percentage from 0% to 100%
-  wholePercent = round(percentage); // Rounds percentage to a whole number
-  if (wholePercent == 100) { // Manually rounds 100% to 99%, as that is the max that can be displayed with 2 7 segment displays
+  // put your main code here, to run repeatedly:
+  potentInput = analogRead(inPin);
+  percentage = (potentInput/1023)*100;
+  wholePercent = round(percentage); // Rounded percentage to a whole number
+  if (wholePercent == 100) {
     wholePercent = wholePercent - 1;
   }
-  onesDigit = wholePercent % 10; // Stores the digit in the ones place
-  tensDigit = (wholePercent - onesDigit) / 10; // Stores the digit in the tens place
-  // These next four lines aren't necessary, they're there to confirm the values of the above variables
-  // Serial.println(percentage);
-  // Serial.println(wholePercent);
-  // Serial.println(tensDigit);
-  // Serial.println(onesDigit);
+  onesDigit = wholePercent % 10;
+  tensDigit = (wholePercent - onesDigit) / 10;
+  Serial.println(percentage);
+  Serial.println(wholePercent);
+  Serial.println(tensDigit);
+  Serial.println(onesDigit);
 
-  // Ones digit loop - Manually converts the digit stored in the ones place to its binary equivalent with a 7 segment decoder.
+  // Ones digit loop
   for (int i=0; i<10; i++) {
     if (onesDigit == i) {
         if (i == 0) {
@@ -107,7 +108,7 @@ void loop() {
         }
     }
   }
-  // Tens digit loop - Manually converts the digit stored in the tens place to its binary equivalent with a 7 segment decoder
+  // Tens digit loop
   for (int i; i<10 ; i++) {
     if (tensDigit == i) {
         if (i == 0){
@@ -172,6 +173,7 @@ void loop() {
       }
     }
   }
-  delay(1000); // Stops the program from looping again for 1 second
+  Serial.println();
+  delay(1000);
   
 }
