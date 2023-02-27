@@ -1,10 +1,10 @@
 // C++ code
 int inPin = (A0); // Declares pin A0 as the input pin
-int outOnes1 = (8); // This and the next four lines declare pins 0-3 as output pins for the ones digit.
+int outOnes1 = (8); // This and the next three lines declare pins 0-3 as output pins for the ones digit.
 int outOnes2 = (9);
 int outOnes3 = (12);
 int outOnes4 = (10);
-int outTens1 = (13); // This and the next four lines declare pins as output pins for the tens digit.
+int outTens1 = (13); // This and the next three lines declare pins as output pins for the tens digit.
 int outTens2 = (3);
 int outTens3 = (11);
 int outTens4 = (2);
